@@ -116,15 +116,17 @@ function SubjectCard({
     >
       <AccordionTrigger className="w-[300px] flex items-center">
         <div className="flex items-center gap-4 flex-1">
-          <Checkbox
-            checked={isChecked === true}
-            onCheckedChange={onCheck}
-            ref={(node: HTMLButtonElement | null) => {
-              if (node) {
-                (node as any).indeterminate = isChecked === "indeterminate";
-              }
-            }}
-          />
+          <div onClick={e => e.stopPropagation()}>
+            <Checkbox
+              checked={isChecked === true}
+              onCheckedChange={onCheck}
+              ref={(node: HTMLButtonElement | null) => {
+                if (node) {
+                  (node as any).indeterminate = isChecked === "indeterminate";
+                }
+              }}
+            />
+          </div>
           <h2>{subject}</h2>
         </div>
         <div className="flex items-center gap-2 mr-2">
