@@ -1,4 +1,5 @@
 import React from "react";
+import useLocalStorage from "use-local-storage";
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "~/components/ui/accordion";
 import { Checkbox } from "~/components/ui/checkbox";
@@ -6,47 +7,51 @@ import { CircularProgress } from "~/components/ui/circular-progress";
 import { SYLLABUS } from "~/data/syllabus";
 
 export default function NewTab() {
-  const [checkedSubjects, setCheckedSubjects] = React.useState<Record<string, boolean>>({});
-  const [checkedChapters, setCheckedChapters] = React.useState<Record<string, Record<string, boolean>>>({});
+  const [checkedSubjects, setCheckedSubjects] = useLocalStorage<Record<string, boolean>>(
+    "hsc-checked-subjects",
+    {},
+  );
+  const [checkedChapters, setCheckedChapters] = useLocalStorage<Record<string, Record<string, boolean>>>(
+    "hsc-checked-chapters",
+    {},
+  );
 
   const handleSubjectCheck = (subject: string) => {
     const newCheckedState = !checkedSubjects[subject];
-    setCheckedSubjects(prev => ({
-      ...prev,
+    setCheckedSubjects({
+      ...checkedSubjects,
       [subject]: newCheckedState,
-    }));
+    });
 
     // Update all chapters for this subject
     const chapters = Object.keys(SYLLABUS[subject as keyof typeof SYLLABUS]);
-    setCheckedChapters(prev => ({
-      ...prev,
+    setCheckedChapters({
+      ...checkedChapters,
       [subject]: chapters.reduce((acc, chapter) => ({
         ...acc,
         [chapter]: newCheckedState,
       }), {}),
-    }));
+    });
   };
 
   const handleChapterCheck = (subject: string, chapter: string) => {
-    setCheckedChapters((prev) => {
-      const newChapters = {
-        ...prev,
-        [subject]: {
-          ...prev[subject],
-          [chapter]: !prev[subject]?.[chapter],
-        },
-      };
+    const newChapters = {
+      ...checkedChapters,
+      [subject]: {
+        ...checkedChapters[subject],
+        [chapter]: !checkedChapters[subject]?.[chapter],
+      },
+    };
 
-      // Update subject state based on chapter states
-      const chapters = Object.keys(SYLLABUS[subject as keyof typeof SYLLABUS]);
-      const checkedChaptersCount = chapters.filter(ch => newChapters[subject]?.[ch]).length;
+    setCheckedChapters(newChapters);
 
-      setCheckedSubjects(prevSubjects => ({
-        ...prevSubjects,
-        [subject]: checkedChaptersCount === chapters.length,
-      }));
+    // Update subject state based on chapter states
+    const chapters = Object.keys(SYLLABUS[subject as keyof typeof SYLLABUS]);
+    const checkedChaptersCount = chapters.filter(ch => newChapters[subject]?.[ch]).length;
 
-      return newChapters;
+    setCheckedSubjects({
+      ...checkedSubjects,
+      [subject]: checkedChaptersCount === chapters.length,
     });
   };
 
