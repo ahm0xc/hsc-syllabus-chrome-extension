@@ -9,7 +9,7 @@ import NewTab from "./new-tab";
 
 ReactDOM.createRoot(document.getElementById("app") as HTMLElement).render(
   <React.StrictMode>
-    <ThemeProvider>
+    <ThemeProvider defaultTheme="dark">
       <NewTab />
     </ThemeProvider>
   </React.StrictMode>,
