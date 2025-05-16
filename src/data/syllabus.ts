@@ -72,13 +72,41 @@ const BIOLOGY_2ND = {
   "জিনতত্ত্ব ও বিবর্তন": [],
 } as const;
 
-const INFORMATION_TECHNOLOGY = {} as const;
+const INFORMATION_TECHNOLOGY = {
+  "বিশ্ব ও বাংলাদেশ পরিচিতি": [],
+  "কমিউনিকেশন সিস্টেমস ও নেটওয়ার্কিং": [],
+  "সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস": [],
+  "ওয়েব ডিজাইন পরিচিতি এবং এইচটিএমএল": [],
+  "প্রোগ্রামিং ভাষা": [],
+} as const;
 
-const BANGLA_1ST = {} as const;
+const BANGLA_1ST = {
+  "অপরিচিতা": [],
+  "বিলাসী": [],
+  "আমার পথ": [],
+  "মানব কল্যাণ": [],
+  "মাসি-পিসি": [],
+  "বায়ান্নর দিনগুলো ": [],
+  "রেইনকোট": [],
+  "সোনার তরী": [],
+  "বিদ্রোহী": [],
+  "প্রতিদান": [],
+  "তাহারেই পড়ে মনে": [],
+  "আঠারো বছর বয়স": [],
+  "ফেব্রুয়ারি ১৯৬৯": [],
+  "আমি কিংবদন্তির কথা বলছি": [],
+  "লালসালু": [],
+  "সিরাজউদ্দৌলা": [],
+} as const;
 
-const BANGLA_2ND = {} as const;
+const BANGLA_2ND = {
+  "ধ্বনিতত্ত্ব": [],
+  "অর্থতত্ত্ব": [],
+  "অনুবাদ": [],
+  "ক্রিয়ার কাল": [],
+} as const;
 
-const ENGLISH = {} as const;
+// const ENGLISH = {} as const;
 
 export const SYLLABUS = {
   "পদার্থবিজ্ঞান ১ম": PHYSICS_1ST,
@@ -92,5 +120,5 @@ export const SYLLABUS = {
   "তথ্য ও যোগাযোগ প্রযুক্তি": INFORMATION_TECHNOLOGY,
   "বাংলা ১ম": BANGLA_1ST,
   "বাংলা ২য়": BANGLA_2ND,
-  "English": ENGLISH,
+  // "English": ENGLISH,
 } as const;
